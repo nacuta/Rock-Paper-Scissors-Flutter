@@ -7,6 +7,8 @@ import 'package:rockpaper/winnerLogic.dart';
 void main() {
   runApp(
     MaterialApp(
+      debugShowCheckedModeBanner: false,
+
       theme: ThemeData(
         primaryColor: Color(0xFF3EBACE),
         accentColor: Color(0xFFD8ECF1),
@@ -56,8 +58,8 @@ class _MyAppState extends State<MyApp> {
         ),
         child: Image.asset(
           "assets/$imageUser.png",
-          // height: 100,
-          // width: 100,
+          height: 150,
+          width: 150,
         ),
       ),
     );
@@ -73,15 +75,26 @@ class _MyAppState extends State<MyApp> {
           title: Center(child: Text("Rock Paper Scissors")),
           backgroundColor: Theme.of(context).primaryColor,
         ),
-        body: OrientationBuilder(
-          builder: (context, orientation) {
-            return orientation == Orientation.portrait
-                ? _buildVerticalLayout()
-                : _buildHorizontalLayout();
-          },
+        body: Container(child: Center(
+          child:Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+            showOptions(0),
+            showOptions(1),
+
+            showOptions(2),
+
+          ],),
+        ),),
+        // body: OrientationBuilder(
+        //   builder: (context, orientation) {
+        //     return orientation == Orientation.portrait
+        //         ? _buildVerticalLayout()
+        //         : _buildHorizontalLayout();
+        //   },
          
         ),
-      ),
+      
     );
   }
 }
