@@ -104,50 +104,61 @@ class GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Center(child: Text("Rock Paper Scissors")),
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
-      body: SafeArea(
-        child: Container(
-          margin: EdgeInsets.all(8.0),
-          padding: EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              userWidget(),
-              Center(
-                child: Text(
-                  "VS",
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: Colors.blue,
-                    fontWeight: FontWeight.w900,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          title: Center(child: Text("Rock Paper Scissors")),
+          backgroundColor: Theme.of(context).primaryColor,
+        ),
+        body: SafeArea(
+          child: Container(
+            margin: EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                userWidget(),
+                Center(
+                  child: Text(
+                    "VS",
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.blue,
+                      fontWeight: FontWeight.w900,
+                    ),
                   ),
                 ),
-              ),
-              cpuWidget(),
+                cpuWidget(),
 
-              // Container(
-              //   child: Text("Ce ai facut> $text"),
-              // ),
-              Container(child: won()),
-              Container(
-                child: RaisedButton(
-                  // shape: ShapeBorder(),
-                  onPressed: () {
-                    setState(() {
-                      Navigator.pushReplacement(
-                          context, MaterialPageRoute(builder: (_) => MyApp()));
-                      winnerLogic.reset();
-                    });
-                  },
-                  child: Text("Restart"),
+                // Container(
+                //   child: Text("Ce ai facut> $text"),
+                // ),
+                Container(child: won()),
+                Container(
+                  child: RaisedButton(
+                    color: Colors.greenAccent,
+                    elevation: 5.0,
+                    padding: EdgeInsets.all(
+                        20.0), //distance of all the sides to the //child
+
+                    shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(18.0),
+                      side: BorderSide(color: Colors.black),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (_) => MyApp()));
+                        winnerLogic.reset();
+                      });
+                    },
+                    child: Text("Restart"),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
