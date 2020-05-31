@@ -8,7 +8,6 @@ void main() {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-
       theme: ThemeData(
         primaryColor: Color(0xFF3EBACE),
         accentColor: Color(0xFFD8ECF1),
@@ -65,6 +64,36 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
+  Widget _buildVerticalLayout() {
+    return Container(
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            showOptions(0),
+            showOptions(1),
+            showOptions(2),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHorizontalLayout() {
+    return Container(
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            showOptions(0),
+            showOptions(1),
+            showOptions(2),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -75,26 +104,15 @@ class _MyAppState extends State<MyApp> {
           title: Center(child: Text("Rock Paper Scissors")),
           backgroundColor: Theme.of(context).primaryColor,
         ),
-        body: Container(child: Center(
-          child:Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-            showOptions(0),
-            showOptions(1),
 
-            showOptions(2),
-
-          ],),
-        ),),
-        // body: OrientationBuilder(
-        //   builder: (context, orientation) {
-        //     return orientation == Orientation.portrait
-        //         ? _buildVerticalLayout()
-        //         : _buildHorizontalLayout();
-        //   },
-         
+        body: OrientationBuilder(
+          builder: (context, orientation) {
+            return orientation == Orientation.portrait
+                ? _buildVerticalLayout()
+                : _buildHorizontalLayout();
+          },
         ),
-      
+      ),
     );
   }
 }
