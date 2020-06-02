@@ -4,6 +4,12 @@ import 'package:rockpaper/cpuLogic.dart';
 import 'package:rockpaper/main.dart';
 import 'package:rockpaper/winnerLogic.dart';
 
+import 'package:flutter/material.dart';
+import 'package:rockpaper/Test.dart';
+import 'package:rockpaper/cpuLogic.dart';
+import 'package:rockpaper/main.dart';
+import 'package:rockpaper/winnerLogic.dart';
+
 class GameScreen extends StatefulWidget {
   String userImage;
   int userChoice;
@@ -69,7 +75,7 @@ class GameScreenState extends State<GameScreen> {
   Widget won() {
     writeWinner();
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(16.0),
       child: Align(
         alignment: Alignment.bottomCenter,
         child: Text(' $text',
@@ -160,47 +166,52 @@ class GameScreenState extends State<GameScreen> {
       child: Container(
         margin: EdgeInsets.all(8.0),
         padding: EdgeInsets.all(8.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: Column(
+          // crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            userWidget(),
-            Center(
-              child: Text(
-                "VS",
-                style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.blue,
-                  fontWeight: FontWeight.w900,
+            Row(
+              children: <Widget>[
+                userWidget(),
+                Center(
+                  child: Text(
+                    "VS",
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.blue,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            cpuWidget(),
+                cpuWidget(),
+                Column(
+                  children: [
+                    Container(width: 250, child: won()),
+                    Container(
+                      // width: 400.0,
+                      child: RaisedButton(
+                        color: Colors.greenAccent,
+                        elevation: 5.0,
+                        padding: EdgeInsets.all(
+                            20.0), //distance of all the sides to the //child
 
-            // Container(
-            //   child: Text("Ce ai facut> $text"),
-            // ),
-            Container(child: won()),
-            Container(
-              child: RaisedButton(
-                color: Colors.greenAccent,
-                elevation: 5.0,
-                padding: EdgeInsets.all(
-                    20.0), //distance of all the sides to the //child
-
-                shape: RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(18.0),
-                  side: BorderSide(color: Colors.black),
-                ),
-                onPressed: () {
-                  setState(() {
-                    Navigator.pushReplacement(
-                        context, MaterialPageRoute(builder: (_) => MyApp()));
-                    winnerLogic.reset();
-                  });
-                },
-                child: Text("Restart"),
-              ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.black),
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            Navigator.pushReplacement(context,
+                                MaterialPageRoute(builder: (_) => MyApp()));
+                            winnerLogic.reset();
+                          });
+                        },
+                        child: Text("Restart"),
+                      ),
+                    ),
+                  ],
+                )
+              ],
             ),
           ],
         ),
