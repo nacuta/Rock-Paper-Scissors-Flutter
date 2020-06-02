@@ -4,12 +4,6 @@ import 'package:rockpaper/cpuLogic.dart';
 import 'package:rockpaper/main.dart';
 import 'package:rockpaper/winnerLogic.dart';
 
-import 'package:flutter/material.dart';
-import 'package:rockpaper/Test.dart';
-import 'package:rockpaper/cpuLogic.dart';
-import 'package:rockpaper/main.dart';
-import 'package:rockpaper/winnerLogic.dart';
-
 class GameScreen extends StatefulWidget {
   String userImage;
   int userChoice;
