@@ -6,6 +6,7 @@ class Test {
     print(this.images);
   }
 }
+// http://developine.com/flutter-full-screen-splash-screen-tutorial/
 //  child: SafeArea(
 //             child: Container(
 //               alignment: Alignment.center,
