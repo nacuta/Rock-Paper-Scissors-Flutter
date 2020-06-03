@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:rockpaper/Test.dart';
 import 'package:rockpaper/gameScreen.dart';
 import 'package:rockpaper/winnerLogic.dart';
+import 'SplashScreen.dart';
 
 void main() {
   runApp(
@@ -41,7 +42,7 @@ class _MyAppState extends State<MyApp> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (_) => GameScreen(imageUser, position),
+              builder: (_) => SplashScreen(imageUser, position),
             ),
           );
         });
@@ -63,7 +64,16 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
-
+// route(){
+//   setState(() {
+//           Navigator.pushReplacement(
+//             context,
+//             MaterialPageRoute(
+//               builder: (_) =>SplashScreen() ,
+//             ),
+//           );
+//         });
+// }
   Widget _buildVerticalLayout() {
     return Container(
       child: Center(
@@ -73,6 +83,8 @@ class _MyAppState extends State<MyApp> {
             showOptions(0),
             showOptions(1),
             showOptions(2),
+            // RaisedButton(onPressed: route,
+            // child: Text("Restart"),),
           ],
         ),
       ),
