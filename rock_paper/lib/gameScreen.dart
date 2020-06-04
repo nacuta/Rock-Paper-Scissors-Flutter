@@ -7,8 +7,7 @@ import 'package:rockpaper/winnerLogic.dart';
 class GameScreen extends StatefulWidget {
   dynamic userImage;
   int userChoice;
-  GameScreen(this.userImage);
-  CpuChoice cpuChoice = CpuChoice();
+  GameScreen(this.userImage, this.userChoice);
 
   @override
   GameScreenState createState() => GameScreenState();
@@ -16,15 +15,50 @@ class GameScreen extends StatefulWidget {
 
 class GameScreenState extends State<GameScreen> {
   WinnerLogic winnerLogic = WinnerLogic();
-  CpuChoice cpuChoice = CpuChoice();
+ 
   Test test = Test();
+String text;
+String image;
 
-  Widget userWidget() {
-    String image = test.images[widget.userImage];
-    return Container(
+    Widget isWinner() {
+      
+    if (widget.userImage == 5) {
+       String userimage = test.images[widget.userChoice];
+       String cpuimage = userimage;
+      return Container(
       child: FlatButton(
         // color: color,
-        onPressed: () {
+        onPressed: () { 
+
+          setState(() {});
+        },
+        child: Container(
+          child: Column(
+            children: <Widget>[
+              Image.asset(
+                "assets/$userimage.png",
+                width: 180,
+                height: 180,
+              ),
+               Image.asset(
+                "assets/$cpuimage.png",
+                width: 180,
+                height: 180,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );;
+    } else {
+     image = test.images[widget.userImage];
+       return Container(
+      child: FlatButton(
+        // color: color,
+        onPressed: () { 
+          var test = isWinner();
+    print(test);
+    // print(image);
           setState(() {});
         },
         child: Container(
@@ -40,17 +74,17 @@ class GameScreenState extends State<GameScreen> {
         ),
       ),
     );
+    }
   }
-
  
 
-  String text;
+  
   Widget won() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Align(
         alignment: Alignment.bottomCenter,
-        child: Text(' $text',
+        child: Text(' ceva',
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: Colors.grey[800],
@@ -62,9 +96,7 @@ class GameScreenState extends State<GameScreen> {
     );
   }
 
-
-
-  Widget verticalLayout() {
+  Widget veerticalLayout() {
     return SafeArea(
       child: Container(
         margin: EdgeInsets.all(8.0),
@@ -73,7 +105,7 @@ class GameScreenState extends State<GameScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            userWidget(),
+            isWinner(),
             // Center(
             //   child: Text(
             //     "VS",
@@ -117,7 +149,7 @@ class GameScreenState extends State<GameScreen> {
     );
   }
 
-  Widget horizontalLayout() {
+  Widget hoorizontalLayout() {
     return SafeArea(
       child: Container(
         margin: EdgeInsets.all(8.0),
@@ -128,7 +160,7 @@ class GameScreenState extends State<GameScreen> {
           children: <Widget>[
             Row(
               children: <Widget>[
-                userWidget(),
+                isWinner(),
                 // Center(
                 //   child: Text(
                 //     "VS",
@@ -188,8 +220,8 @@ class GameScreenState extends State<GameScreen> {
         body: OrientationBuilder(
           builder: (context, orientation) {
             return orientation == Orientation.portrait
-                ? verticalLayout()
-                : horizontalLayout();
+                ? veerticalLayout()
+                : hoorizontalLayout();
           },
         ),
       ),

@@ -22,9 +22,10 @@ class SplashState extends State<SplashScreen> {
   Test test = Test();
 route() {
   int  winner = writeWinner();
+  int cpu = cpuChoice.cpuRandomNumber;
   print (winner);
   Navigator.pushReplacement(context, MaterialPageRoute(
-      builder: (context) => GameScreen(winner)
+      builder: (context) => GameScreen(winner,cpu )
     )
   ); 
 }
@@ -108,7 +109,7 @@ route() {
     if ((widget.userChoice == 0 && cpuChoice.cpuRandomNumber == 0) ||
         (widget.userChoice == 1 && cpuChoice.cpuRandomNumber == 1) ||
         (widget.userChoice == 2 && cpuChoice.cpuRandomNumber == 2)) {
-      return winner = 0;// "You manage a Draw game, pathetic.";
+      return winner = 5;// "You manage a Draw game, pathetic.";
     } else if ((widget.userChoice == 0 && cpuChoice.cpuRandomNumber == 1) ||
         (widget.userChoice == 1 && cpuChoice.cpuRandomNumber == 2) ||
         (widget.userChoice == 2 && cpuChoice.cpuRandomNumber == 0)) {
