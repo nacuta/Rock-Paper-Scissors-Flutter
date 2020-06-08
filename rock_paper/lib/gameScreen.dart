@@ -6,7 +6,7 @@ import 'package:rockpaper/winnerLogic.dart';
 class GameScreen extends StatefulWidget {
   dynamic userImage;
   int userChoice;
-  String tex ;
+  String tex;
   GameScreen(this.userImage, this.userChoice, this.tex);
 
   @override
@@ -33,7 +33,6 @@ class GameScreenState extends State<GameScreen> {
             },
             child: Stack(
               children: <Widget>[
-              
                 Image.asset(
                   "assets/$userimage.png",
                   width: 180,
@@ -44,15 +43,12 @@ class GameScreenState extends State<GameScreen> {
                   width: 220,
                   height: 180,
                 ),
-                  Positioned(
+                Positioned(
                   left: 20,
                   right: 20,
                   bottom: 0,
-                  child: Image.asset(
-                    "assets/crack.png",
-                    width: 200,
-                    height: 200
-                  ),
+                  child:
+                      Image.asset("assets/crack.png", width: 200, height: 200),
                 ),
               ],
             ),
@@ -88,19 +84,31 @@ class GameScreenState extends State<GameScreen> {
 
   Widget winnerText() {
     return Center(
-        child: Text(
-      'Winner !!!\n Superb',
-      style: TextStyle(
-          color: Colors.amber[400],
-          fontSize: 48,
-          shadows: [
-            Shadow(
-              blurRadius: 8.0,
-              color: Colors.black54,
-              offset: Offset(3.0, 3.0),
-            ),
-          ],
-          fontWeight: FontWeight.bold),
+        child: Container(
+      padding: EdgeInsets.all(8.0),
+      decoration: BoxDecoration(
+        // color: Colors.redAccent[400],
+        borderRadius: new BorderRadius.only(
+          topLeft: const Radius.circular(20.0),
+          topRight: const Radius.circular(20.0),
+          bottomLeft: const Radius.circular(20.0),
+          bottomRight: const Radius.circular(20.0),
+        ),
+      ),
+      child: Text(
+       widget.tex,
+        style: TextStyle(
+            color: Colors.lightBlue[300],
+            fontSize: 40,
+            shadows: [
+              Shadow(
+                blurRadius: 3.0,
+                // color: Colors.pink,
+                offset: Offset(1.0, 1.0),
+              ),
+            ],
+            fontWeight: FontWeight.bold),
+      ),
     ));
   }
 
