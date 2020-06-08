@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:rockpaper/Test.dart';
-import 'package:rockpaper/cpuLogic.dart';
 import 'package:rockpaper/main.dart';
 import 'package:rockpaper/winnerLogic.dart';
 
 class GameScreen extends StatefulWidget {
   dynamic userImage;
   int userChoice;
-  GameScreen(this.userImage, this.userChoice);
+  String tex ;
+  GameScreen(this.userImage, this.userChoice, this.tex);
 
   @override
   GameScreenState createState() => GameScreenState();
@@ -15,70 +15,95 @@ class GameScreen extends StatefulWidget {
 
 class GameScreenState extends State<GameScreen> {
   WinnerLogic winnerLogic = WinnerLogic();
- 
+
   Test test = Test();
-String text;
-String image;
+  String text;
+  String image;
 
-    Widget isWinner() {
-      
+  Widget isWinner() {
     if (widget.userImage == 5) {
-       String userimage = test.images[widget.userChoice];
-       String cpuimage = userimage;
+      String userimage = test.images[widget.userChoice];
+      String cpuimage = userimage;
       return Container(
-      child: FlatButton(
-        // color: color,
-        onPressed: () { 
-
-          setState(() {});
-        },
         child: Container(
-          child: Column(
-            children: <Widget>[
-              Image.asset(
-                "assets/$userimage.png",
-                width: 180,
-                height: 180,
-              ),
-               Image.asset(
-                "assets/$cpuimage.png",
-                width: 180,
-                height: 180,
-              ),
-            ],
+          child: FlatButton(
+            // color: color,
+            onPressed: () {
+              setState(() {});
+            },
+            child: Stack(
+              children: <Widget>[
+              
+                Image.asset(
+                  "assets/$userimage.png",
+                  width: 180,
+                  height: 180,
+                ),
+                Image.asset(
+                  "assets/$cpuimage.png",
+                  width: 220,
+                  height: 180,
+                ),
+                  Positioned(
+                  left: 20,
+                  right: 20,
+                  bottom: 0,
+                  child: Image.asset(
+                    "assets/crack.png",
+                    width: 200,
+                    height: 200
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    );;
+      );
     } else {
-     image = test.images[widget.userImage];
-       return Container(
-      child: FlatButton(
-        // color: color,
-        onPressed: () { 
-          var test = isWinner();
-    print(test);
-    // print(image);
-          setState(() {});
-        },
-        child: Container(
-          child: Column(
-            children: <Widget>[
-              Image.asset(
-                "assets/$image.png",
-                width: 180,
-                height: 180,
-              ),
-            ],
+      image = test.images[widget.userImage];
+      return Container(
+        child: FlatButton(
+          // color: color,
+          onPressed: () {
+            var test = isWinner();
+            print(test);
+            // print(image);
+            setState(() {});
+          },
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                Image.asset(
+                  "assets/$image.png",
+                  width: 180,
+                  height: 180,
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
     }
   }
- 
 
-  
+  Widget winnerText() {
+    return Center(
+        child: Text(
+      'Winner !!!\n Superb',
+      style: TextStyle(
+          color: Colors.amber[400],
+          fontSize: 48,
+          shadows: [
+            Shadow(
+              blurRadius: 8.0,
+              color: Colors.black54,
+              offset: Offset(3.0, 3.0),
+            ),
+          ],
+          fontWeight: FontWeight.bold),
+    ));
+  }
+
   Widget won() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -105,6 +130,7 @@ String image;
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
+            winnerText(),
             isWinner(),
             // Center(
             //   child: Text(
@@ -160,6 +186,8 @@ String image;
           children: <Widget>[
             Row(
               children: <Widget>[
+                winnerText(),
+
                 isWinner(),
                 // Center(
                 //   child: Text(

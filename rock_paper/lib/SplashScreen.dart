@@ -1,6 +1,5 @@
 import 'dart:async';
-import 'package:rockpaper/main.dart';
-
+import 'package:audioplayers/audio_cache.dart';
 import 'package:flutter/material.dart';
 import 'package:rockpaper/Test.dart';
 import 'package:rockpaper/cpuLogic.dart';
@@ -19,24 +18,40 @@ class SplashScreen extends StatefulWidget {
 class SplashState extends State<SplashScreen> {
     WinnerLogic winnerLogic = WinnerLogic();
   CpuChoice cpuChoice = CpuChoice();
-  Test test = Test();
+  Test test = Test(); 
+  List<String> texts = [
+    'ai castigat ','ai pierdut'
+  ];
 route() {
   int  winner = writeWinner();
+  String tex ;
+  if(widget.userChoice ==winner){
+   tex = texts[0];
+  }else {
+    tex=  texts[1];
+  };
+
   int cpu = cpuChoice.cpuRandomNumber;
   print (winner);
   Navigator.pushReplacement(context, MaterialPageRoute(
-      builder: (context) => GameScreen(winner,cpu )
+      builder: (context) => GameScreen(winner,cpu, tex)
     )
   ); 
 }
-  startTime() async {
-  var duration = new Duration(seconds: 2);
+  startTime() async { 
+    playSound();
+  var duration = new Duration(seconds: 4);
   return new Timer(duration, route);
 }
+void playSound() {
+    final player = AudioCache();
+    player.play('swords.wav');
+  }
   @override
   void initState() {
     // TODO: implement initState
-    // super.initState();
+ super.initState();
+   
     startTime();
   }
   Widget userWidget() {
@@ -68,7 +83,9 @@ route() {
       child: FlatButton(
         // color: color,
         onPressed: () {
-          setState(() {});
+          setState(() {
+            playSound();
+          });
         },
         child: Container(
           child: Column(
@@ -85,14 +102,16 @@ route() {
     );
   }
 
-  String text;
+  
   Widget won() {
-    writeWinner();
-    return Padding(
+   
+    int  winner = writeWinner();
+    if(widget.userChoice ==winner){
+ return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Align(
         alignment: Alignment.bottomCenter,
-        child: Text(' $text',
+        child: Text(' $texts[0]',
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: Colors.grey[800],
@@ -102,6 +121,23 @@ route() {
                 fontSize: 30)),
       ),
     );
+    } else {
+      return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: Text(' $texts[1]',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Colors.grey[800],
+                fontWeight: FontWeight.w900,
+                fontStyle: FontStyle.italic,
+                fontFamily: 'Open Sans',
+                fontSize: 30)),
+      ),
+    );
+    }
+   
   }
 
  int writeWinner() {
@@ -134,6 +170,7 @@ route() {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             userWidget(),
+           
             Center(
               child: Text(
                 "VS",
@@ -145,6 +182,7 @@ route() {
               ),
             ),
             cpuWidget(),
+            
 
            
             
