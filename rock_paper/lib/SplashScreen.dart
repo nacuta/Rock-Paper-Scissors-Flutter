@@ -5,7 +5,7 @@ import 'package:rockpaper/Test.dart';
 import 'package:rockpaper/cpuLogic.dart';
 import 'package:rockpaper/gameScreen.dart';
 import 'package:rockpaper/winnerLogic.dart';
-//salut clau
+//salut claudiu
 class SplashScreen extends StatefulWidget {
   String userImage;
   int userChoice;
